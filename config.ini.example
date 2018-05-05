@@ -1,0 +1,13 @@
+[General]
+host=
+url_secret=
+display_message=
+
+[TelegramAPI]
+chat_id=
+api_token=
+
+[NexmoAPI]
+api_key=
+api_secret=
+phone_number=

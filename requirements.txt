@@ -1,0 +1,8 @@
+# pip install -r requirements.txt
+# pyopenssl ndg-httpsclient pyasn1
+
+python-telegram-bot
+nexmo
+flask
+# requests[security]
+# peewee
