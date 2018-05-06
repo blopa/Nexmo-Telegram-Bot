@@ -30,13 +30,15 @@ def index():
 @application.route('/nexmo/telegram' + URL_SECRET, methods=['POST'])
 def telegram_webhook():
 	update = telegram.update.Update.de_json(request.get_json(force=True), bot)
-	if update.message.chat_id == int(TELEGRAM_CHAT_ID):
+	if update.message.text == '/my_id':
+		bot.sendMessage(chat_id=update.message.chat_id, text='Your Telegram ID is ' + update.message.chat_id)
+	elif update.message.chat_id == int(TELEGRAM_CHAT_ID):
 		if update.message.reply_to_message is not None:
 			data = update.message.reply_to_message.text.splitlines()
 			to = data[0].replace('From: ', '')
 			sender = data[1].replace('To: ', '')
 			if to and sender:
-				bot.sendMessage(chat_id=update.message.chat_id, text='Trying to send your message...')
+				bot.sendMessage(chat_id=TELEGRAM_CHAT_ID, text='Trying to send your message...')
 				# Sending message
 				response = nexmo_client.send_message({'from': sender, 'to': to, 'text': update.message.text})
 				response = response['messages'][0]
@@ -46,7 +48,7 @@ def telegram_webhook():
 				else:
 					bot.sendMessage(chat_id=TELEGRAM_CHAT_ID, text='Error: ' + response['error-text'])
 			else:
-				bot.sendMessage(chat_id=update.message.chat_id, text='This is not a valid reply.')
+				bot.sendMessage(chat_id=TELEGRAM_CHAT_ID, text='This is not a valid reply.')
 		elif update.message.text.startswith('/new'):
 			params = update.message.text.split()
 			if len(params) >= 3 and params[0] == '/new':
@@ -54,7 +56,7 @@ def telegram_webhook():
 				sender = NEXMO_MY_NUMBER
 				message = update.message.text.replace(params[0] + ' ' + params[1], '')
 				if to and sender and message:
-					bot.sendMessage(chat_id=update.message.chat_id, text='Trying to send your message...')
+					bot.sendMessage(chat_id=TELEGRAM_CHAT_ID, text='Trying to send your message...')
 					# Sending message
 					response = nexmo_client.send_message({'from': sender, 'to': to, 'text': message})
 					response = response['messages'][0]
@@ -64,11 +66,11 @@ def telegram_webhook():
 					else:
 						bot.sendMessage(chat_id=TELEGRAM_CHAT_ID, text='Error: ' + response['error-text'])
 				else:
-					bot.sendMessage(chat_id=update.message.chat_id, text='This is not a valid command.')
+					bot.sendMessage(chat_id=TELEGRAM_CHAT_ID, text='This is not a valid command.')
 			else:
-				bot.sendMessage(chat_id=update.message.chat_id, text='Incorrect data.')
+				bot.sendMessage(chat_id=TELEGRAM_CHAT_ID, text='Incorrect data.')
 		else:
-			bot.sendMessage(chat_id=update.message.chat_id, text=update.message.text + ' :D')
+			bot.sendMessage(chat_id=TELEGRAM_CHAT_ID, text=update.message.text + ' :D')
 
 	return ('', 204)
 
