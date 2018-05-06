@@ -31,7 +31,7 @@ def index():
 def telegram_webhook():
 	update = telegram.update.Update.de_json(request.get_json(force=True), bot)
 	if update.message.text == '/my_id':
-		bot.sendMessage(chat_id=update.message.chat_id, text='Your Telegram ID is ' + update.message.chat_id)
+		bot.sendMessage(chat_id=update.message.chat_id, text='Your Telegram ID is ' + str(update.message.chat_id))
 	elif update.message.chat_id == int(TELEGRAM_CHAT_ID):
 		if update.message.reply_to_message is not None:
 			data = update.message.reply_to_message.text.splitlines()

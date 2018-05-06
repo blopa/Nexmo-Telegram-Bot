@@ -7,6 +7,7 @@ A big thanks to [python-telegram-bot](https://github.com/python-telegram-bot/pyt
 **This is a fan-made Telegram Bot which is not supported by or associated with Nexmo.**
 
 # How To Use
+
 Open Python Console and run:
 ```python
 pip install -r requirements.txt
@@ -54,9 +55,13 @@ Go to your Nexmo settings panel and [add your webhook URL in the settings](https
 - **Send a new text message**: Use the command `/new` in this format `"/new phone_number text message here"`.
 - **Reply to a text message**: Simply reply to the Telegram message.
 - **Receive a text message**: Share your number with your friends and wait :D
+
 # Release Notes
+- **v0.0.2:**
+    - Fix string parse
 - **v0.0.1:**
     - First version
+
 # FAQ
 **Q: Where do I run this bot?**
 
@@ -70,7 +75,7 @@ A: I can try. Open a issue and I'll see what I can do.
 
 A: Thank you! You can help by codding more features, creating pull requests, or donating using Bitcoin: **1BdL9w4SscX21b2qeiP1ApAFNAYhPj5GgG**
 
-License
+# License
 ----
 MIT License
 
